@@ -1,0 +1,14 @@
+.back {
+    margin-left: 10px;
+}
+.save {
+    text-align: right;
+}
+.btn-save {
+    margin-right: 10px;
+}
+.title {
+    display: inline;
+    margin-left: 10px;
+    color: white;
+}
