@@ -9,16 +9,16 @@ Simple and optimized React boilerplate. It includes:
 - [x] React Router v4
 - [x] Component testing using [Enzyme](https://github.com/airbnb/enzyme) and [Jest](https://facebook.github.io/jest)
 - [x] Code Coverage
-- [x] Latest Webpack (v.3.11.0) and Webpack Dev Server (v.2.9.5) with Scope Hoisting enabled
+- [x] Latest Webpack (v.4.6.0) and Webpack Dev Server (v.3.1.3) with Scope Hoisting enabled
 - [x] Hot Module Replacement using [react-hot-loader](https://github.com/gaearon/react-hot-loader)
 - [x] ES6 linting with continuous linting on file change
-- [x] SASS support
+- [x] SASS/LESS support
 - [x] Separate CSS stylesheets generation
 - [x] Automatic HTML generation
 - [x] Production Config
 - [x] Custom Babel Preset with Decorators, Class Properties, Rest/Spread operator support
 - [x] Export Separate Vendor Files
-- [ ] Redux
+- [x] Redux v4, Axios, Antd 3.4.3
 
 ## Starting the dev server
 
