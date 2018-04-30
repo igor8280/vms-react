@@ -1,0 +1,7 @@
+@font-face {
+    font-family: Assassin;
+    src: url('../fonts/Assassin.ttf')
+}
+* {
+    font-family: Arial, Assassin;
+}
