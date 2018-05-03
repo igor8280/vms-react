@@ -5,9 +5,12 @@ import LoginForm from './login/login';
 import Navigation from '../components/navigation';
 import MainHeader from './header/main';
 // import EditHeader from './header/edit';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Route } from 'react-router-dom';
 import { setupHeader } from './login/services';
 import less from './app.less';
+
+import Countries from './Countries/Countries';
+import CountriesForm from './Countries/CountriesForm';
 
 const { Header, Content, Sider } = Layout;
 const NavWithRouter = withRouter(Navigation);
@@ -47,7 +50,8 @@ class App extends Component {
 					</Header>
 					<Layout>
 						<Content className={appClasses.join(' ')}>
-							Content
+							<Route path="/countries" exact component={Countries}></Route>
+              <Route path="/countries/:id" component={CountriesForm}></Route>
 						</Content>
 					</Layout>
 				</Layout>
@@ -64,4 +68,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

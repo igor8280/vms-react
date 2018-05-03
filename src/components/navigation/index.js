@@ -34,6 +34,9 @@ const Navigation = (props) => {
 				onTitleClick={handleTitleClick}>
 
 				<Menu.Item>
+					<NavLink to="/countries">Countries</NavLink>
+				</Menu.Item>
+				<Menu.Item>
 					<NavLink to="/setup">Setup SP & Community</NavLink>
 				</Menu.Item>
 				<Menu.Item>
@@ -83,15 +86,15 @@ const Navigation = (props) => {
 
 			</SubMenu>
 
-			<SubMenu title={<span>Link</span>} onTitleClick={handleTitleClick}>
+			{/*<SubMenu title={<span>Link</span>} onTitleClick={handleTitleClick}>*/}
 
-				<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>
-				<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>
-				<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>
-				<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>
-				<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>
+				{/*<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>*/}
+				{/*<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>*/}
+				{/*<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>*/}
+				{/*<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>*/}
+				{/*<Menu.Item >Link {Math.round(Math.random()*50)}</Menu.Item>*/}
 
-			</SubMenu>
+			{/*</SubMenu>*/}
 
 		</Menu>
 	);
