@@ -1,0 +1,93 @@
+.main {
+  display: flex;
+}
+.logo {
+  background-color: #04152a;
+  overflow-y: scroll;
+  transition: width 0.2s;
+  position: fixed;
+
+  &.open {
+    width: 300px;
+
+    img {
+      opacity: 1;
+      transition: opacity 1.5s;
+    }
+  }
+  &.close {
+    width: 100px;
+
+    img {
+      width: 0px;
+      opacity: 0;
+    }
+  }
+}
+
+.middle {
+  flex-grow: 1;
+  padding-left: 10px;
+  display: flex;
+  transition: margin-left 0.2s;
+
+  &.open {
+    margin-left: 300px;
+  }
+  &.close {
+    margin-left: 100px;
+  }
+
+  h1 {
+    color: #353c48;
+  }
+
+  .box {
+    text-align: center;
+    flex-grow: 1;
+
+    div {
+      display: inline-block;
+      background-color: #f4f4f4;
+      border: 1px solid #e2e3eb;
+      max-width: 320px;
+      margin-left: 15px;
+      line-height: 32px;
+      cursor: pointer;
+
+      &.disabled {
+        cursor: no-drop;
+        opacity: 0.5;
+      }
+
+      img {
+        width: 50px;
+        height: 40px;
+        padding-right: 10px;
+      }
+      i {
+        padding-left: 5px;
+        padding-right: 5px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.logout {
+  text-align: right;
+  padding-right: 10px;
+}
+
+.toggleNav {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+  color: white;
+}
+
+.toggleNav:hover {
+  color: #1890ff;
+}

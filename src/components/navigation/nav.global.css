@@ -1,0 +1,7 @@
+.ant-menu-item {
+    height: auto !important;
+    line-height: 1.5 !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    white-space: normal !important;
+}

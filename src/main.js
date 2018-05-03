@@ -1,27 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-// import registerServiceWorker from './registerServiceWorker';
-
-import authReducer from './store/reducers/auth';
-
-const rootReducer = combineReducers({
-	auth: authReducer
-});
-
-const store = createStore(rootReducer);
+import store from './store/store';
+import { BrowserRouter } from 'react-router-dom';
 
 store.subscribe(() => {
 	window.localStorage.setItem('vms', JSON.stringify(store.getState()));
 });
 
 import App from './containers/app';
-import './styles/global.css';
+import './styles/app.global.css';
 
 const app = (
 	<Provider store={store}>
-		<App/>
+		<BrowserRouter>
+			<App/>
+		</BrowserRouter>
 	</Provider>
 )
 

@@ -1,0 +1,19 @@
+@font-face {
+    font-family: Assassin;
+    src: url('../assets/fonts/Assassin.ttf')
+}
+* {
+    font-family: Arial, Assassin;
+}
+
+body {
+    background-color: #EFEFEF;
+}
+
+.ant-layout {
+    background: transparent;
+}
+
+.ant-layout-header {
+    padding: 0px;
+}

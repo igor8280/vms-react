@@ -30,20 +30,6 @@ const lessLoader = (module, prod) => cssLoader(module, prod).concat([
 
 module.exports = (prod) => {
 	return {
-		// entry: {
-		// 	vendors: [
-		// 		'antd',
-		// 		'axios',
-		// 		'react',
-		// 		'react-dom',
-		// 		'react-redux',
-		// 		'react-router',
-		// 		'react-router-dom',
-		// 		'redux',
-		// 		'redux-thunk'
-		// 	],
-		// 	app: './src/main.js'
-		// },
 		entry: [
 			'./src/main.js'
 		],
@@ -85,7 +71,11 @@ module.exports = (prod) => {
 					loader: 'style-loader'
 				},
 				{
-					test: /\.css$/,
+					test: /\.global\.css$/,
+					loader: cssLoader(false, prod)
+				},
+				{
+					test: /^((?!\.global).)*\.css$/,
 					loader: cssLoader(true, prod)
 				},
 				{
