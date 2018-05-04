@@ -1,7 +1,7 @@
 import React from 'react';
 import {Menu, Icon} from 'antd';
 const SubMenu = Menu.SubMenu;
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import './nav.global.css';
 
 const handleClick = (e, props) => {
@@ -100,4 +100,4 @@ const Navigation = (props) => {
 	);
 }
 
-export default Navigation;
+export default withRouter(Navigation);

@@ -13,7 +13,7 @@ import Countries from './Countries/Countries';
 import CountriesForm from './Countries/CountriesForm';
 
 const { Header, Content, Sider } = Layout;
-const NavWithRouter = withRouter(Navigation);
+// const NavWithRouter = withRouter(Navigation);
 
 class App extends Component {
 	constructor(props) {
@@ -41,7 +41,7 @@ class App extends Component {
 					trigger={null}
 					hidden={!this.props.showNav}
 				>
-					<NavWithRouter/>
+					<Navigation/>
 				</Sider>
 				<Layout>
 					<Header className={less.header}>
