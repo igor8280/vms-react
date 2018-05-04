@@ -8,7 +8,7 @@ store.subscribe(() => {
 	window.localStorage.setItem('vms', JSON.stringify(store.getState()));
 });
 
-import App from './containers/app';
+import App from './containers/App';
 import './styles/app.global.css';
 
 const app = (
