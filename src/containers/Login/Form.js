@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Icon, Button, Row, Col } from 'antd';
 import { login } from '../../services/Auth';
+
 const FormItem = Form.Item;
 
 class LoginForm extends Component {

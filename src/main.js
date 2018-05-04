@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import store from './store/store';
 import { BrowserRouter } from 'react-router-dom';
+import store from './store/store';
 
 store.subscribe(() => {
 	window.localStorage.setItem('vms', JSON.stringify(store.getState()));
 });
 
 import App from './containers/App';
-import './styles/app.global.css';
+import './styles/App.global.css';
 
 const app = (
 	<Provider store={store}>
@@ -20,4 +20,3 @@ const app = (
 )
 
 ReactDOM.render(app, document.getElementById('root'));
-// registerServiceWorker();
