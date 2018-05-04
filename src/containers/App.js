@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+// import{ Route, withRouter, Redirect, Switch } from 'react-router-dom';
+import{ withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LoginForm from './Login/Form';
+import { Layout } from 'antd';
+
+import AppRouter from '../components/AppRouter/AppRouter';
+// console.log('app router', appRouter);
+
 import Navigation from '../components/Navigation/Navigation';
-// import MainTemplate from './Template/Main';
-// import EditTemplate from './Template/edit';
-import LanguagesList from './Languages/List';
+import LoginForm from './Login/Form';
+// import Dashboard from '../components/Dashboard/Dashboard';
+// import LanguagesList from './Languages/List';
+// import Countries from './Countries/Countries';
+
 import { setupHeader } from '../services/Auth';
 import less from './app.less';
 
@@ -39,10 +46,13 @@ class App extends Component {
 				>
 					<Navigation/>
 				</Sider>
-				<LanguagesList/>
-				{/*<EditTemplate title="Edit title">*/}
-					{/*Content*/}
-				{/*</EditTemplate>*/}
+        <Switch>
+          <AppRouter/>
+          {/*<Route path='/' exact component={Dashboard}/>*/}
+          {/*<Route path='/languages' component={LanguagesList} />*/}
+          {/*<Route path='/countries' component={Countries} />*/}
+          {/*<Redirect to='/' />*/}
+        </Switch>
 			</Layout>
 		);
 	}
@@ -56,4 +66,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));
