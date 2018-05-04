@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Button, Icon } from 'antd';
+
 import {toggleNav, showNav} from "../../store/actions";
 import { logout } from '../../services/Auth';
-import less from './main.less';
+import less from './Main.less';
 
 class MainHeader extends Component {
 	componentDidMount() {
@@ -25,18 +26,6 @@ class MainHeader extends Component {
 				</div>
 				<div className={middleClasses.join(' ')}>
 					<h1>{this.props.title}</h1>
-					{/*<div className={less.box}>*/}
-						{/*<div>*/}
-							{/*<img src={require('assets/images/image-placeholder-header.png')} />*/}
-							{/*Service provider*/}
-							{/*<Icon type="right" />*/}
-						{/*</div>*/}
-						{/*<div className={less.disabled}>*/}
-							{/*<img src={require('assets/images/image-placeholder-header.png')} />*/}
-							{/*Community*/}
-							{/*<Icon type="right" />*/}
-						{/*</div>*/}
-					{/*</div>*/}
 				</div>
 				<div className={less.logout}>
 					<Button onClick={logout}>Logout</Button>

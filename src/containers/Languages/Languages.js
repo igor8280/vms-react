@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import MainTemplate from '../Template/Main';
 import axios from 'axios';
-
 import { Table, Icon, Input, Row, Col, Button } from 'antd';
+import MainTemplate from '../Template/Main';
+
 const Search = Input.Search;
 
-class LanguagesList extends Component {
+class Languages extends Component {
 	state = {
 		languages: [],
 		selectedLanguages: [],
@@ -175,4 +175,4 @@ class LanguagesList extends Component {
 	}
 }
 
-export default LanguagesList;
+export default Languages;

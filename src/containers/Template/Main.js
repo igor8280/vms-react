@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
 import { connect } from 'react-redux';
+import { Layout } from 'antd';
 import MainHeader from '../Header/Main';
-import less from '../app.less';
+import less from '../App.less';
 
 const { Header, Content } = Layout;
 

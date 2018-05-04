@@ -1,12 +1,12 @@
 import React from 'react';
-import {Menu, Icon} from 'antd';
-const SubMenu = Menu.SubMenu;
 import { NavLink, withRouter } from 'react-router-dom';
-import './nav.global.css';
+import {Menu, Icon} from 'antd';
+import './Nav.global.css';
 
+const SubMenu = Menu.SubMenu;
 const handleClick = (e, props) => {
 	console.log(e, props);
-}
+};
 
 let handleTitleClick = (e) => {
 	let subMenu = document.querySelector(`.ant-menu-submenu-title[aria-owns="${e.key}$Menu"]`);
@@ -19,7 +19,7 @@ let handleTitleClick = (e) => {
 			});
 		}, 300);
 	}
-}
+};
 
 const Navigation = (props) => {
 	return (
@@ -44,6 +44,6 @@ const Navigation = (props) => {
 
 		</Menu>
 	);
-}
+};
 
 export default withRouter(Navigation);

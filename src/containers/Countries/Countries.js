@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Table } from 'antd';
 import axios from 'axios';
+import { Table } from 'antd';
 
 import MainHeader from '../Template/Main';
-// const test = (id, context) => {
-//   console.log('id', id);
-//   console.log('context', context);
-// };
 
 const columns = [
   {
