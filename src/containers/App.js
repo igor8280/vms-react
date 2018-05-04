@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import{ Route, withRouter, Redirect, Switch } from 'react-router-dom';
+// import{ Route, withRouter, Redirect, Switch } from 'react-router-dom';
+import{ withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 
+import AppRouter from '../components/AppRouter/AppRouter';
+// console.log('app router', appRouter);
+
 import Navigation from '../components/Navigation/Navigation';
 import LoginForm from './Login/Form';
-import Dashboard from '../components/Dashboard/Dashboard';
-import LanguagesList from './Languages/List';
-import Countries from './Countries/Countries';
+// import Dashboard from '../components/Dashboard/Dashboard';
+// import LanguagesList from './Languages/List';
+// import Countries from './Countries/Countries';
 
 import { setupHeader } from '../services/Auth';
 import less from './app.less';
@@ -43,10 +47,11 @@ class App extends Component {
 					<Navigation/>
 				</Sider>
         <Switch>
-          <Route path='/' exact component={Dashboard}/>
-          <Route path='/languages' component={LanguagesList} />
-          <Route path='/countries' component={Countries} />
-          <Redirect to='/' />
+          <AppRouter/>
+          {/*<Route path='/' exact component={Dashboard}/>*/}
+          {/*<Route path='/languages' component={LanguagesList} />*/}
+          {/*<Route path='/countries' component={Countries} />*/}
+          {/*<Redirect to='/' />*/}
         </Switch>
 			</Layout>
 		);
