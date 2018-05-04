@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Button, Icon } from 'antd';
 import {toggleNav, showNav} from "../../store/actions";
-import { logout } from '../login/services';
+import { logout } from '../../services/Auth';
 import less from './main.less';
 
 class MainHeader extends Component {
@@ -24,7 +24,7 @@ class MainHeader extends Component {
 					<NavLink to="/"><img src={require('assets/images/nav-logo.png')} /></NavLink>
 				</div>
 				<div className={middleClasses.join(' ')}>
-					<h1>Title</h1>
+					<h1>{this.props.title}</h1>
 					<div className={less.box}>
 						<div>
 							<img src={require('assets/images/image-placeholder-header.png')} />

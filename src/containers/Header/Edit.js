@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { NavLink } from 'react-router-dom';
 import { Button, Icon } from 'antd';
 import {showNav} from "../../store/actions";
 import less from './edit.less';
@@ -12,11 +11,11 @@ class EditHeader extends Component {
 	render() {
 		return (
 			<div className={less.editHeader}>
-				<div>
+				<div className={less.back}>
 					<Button>
 						<Icon type="left" />
 					</Button>
-					<h1>Edit title</h1>
+					<h1>{this.props.title}</h1>
 				</div>
 				<div className={less.save}>
 					<Button>Save</Button>

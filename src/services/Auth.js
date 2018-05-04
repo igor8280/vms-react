@@ -1,5 +1,5 @@
-import store from '../../store/store';
-import * as actions from '../../store/actions/index';
+import store from '../store/store';
+import * as actions from '../store/actions/index';
 import axios from 'axios';
 const qs = require('qs');
 
