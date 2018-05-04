@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
 import { NavLink } from 'react-router-dom';
+import { Table } from 'antd';
 import axios from 'axios';
 
+import MainHeader from '../Template/Main';
 // const test = (id, context) => {
 //   console.log('id', id);
 //   console.log('context', context);
@@ -63,7 +64,9 @@ class Countries extends Component {
 
   render() {
     return (
-      <Table dataSource={this.state.data} columns={columns} rowSelection={rowSelection} bordered/>
+      <MainHeader title='Countries'>
+        <Table dataSource={this.state.data} columns={columns} rowSelection={rowSelection} bordered/>
+      </MainHeader>
     )
   }
 }
