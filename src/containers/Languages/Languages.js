@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Table, Icon, Input, Row, Col, Button } from 'antd';
+import { NavLink } from 'react-router-dom';
+import Axios from 'axios';
+import { Table, Icon, Input, Row, Col, Button, notification } from 'antd';
 import MainTemplate from '../Template/Main';
 
 const Search = Input.Search;
@@ -8,7 +9,7 @@ const Search = Input.Search;
 class Languages extends Component {
 	state = {
 		languages: [],
-		selectedLanguages: [],
+		selectedRowKeys: [],
 		loading: false,
 		search: '',
 		sort: {
@@ -21,6 +22,8 @@ class Languages extends Component {
 			totalElements: 1
 		}
 	};
+
+	resource = '/proxy/languages/';
 
 	componentDidMount() {
 		this.getLanguages();
@@ -37,7 +40,7 @@ class Languages extends Component {
 		if (this.state.search)
 			params.q = 'like.' + this.state.search;
 
-		axios.get('/proxy/languages/search', {params}).then((response) => {
+		Axios.get(this.resource + 'search', {params}).then((response) => {
 			this.setState({
 				languages: response.data.content,
 				pagination: {
@@ -45,6 +48,7 @@ class Languages extends Component {
 					totalElements: response.data.totalElements,
 					itemsByPage: response.data.size
 				},
+				selectedRowKeys: [],
 				loading: false
 			});
 		});
@@ -66,19 +70,45 @@ class Languages extends Component {
 		this.setState({pagination}, this.getLanguages);
 	}
 
-	updateItemsByPage(currentPage, itemsByPage) {
+	updateItemsByPage(newPage, itemsByPage) {
 		let pagination = {...this.state.pagination};
-		if (currentPage * itemsByPage > pagination.totalElements)
-			pagination.currentPage = Math.floor(pagination.totalElements / itemsByPage) + 1;
+		pagination.currentPage = newPage;
 		pagination.itemsByPage = itemsByPage;
 		this.setState({pagination}, this.getLanguages);
 	}
 
-	rowSelection = {
-		onChange: (selectedRowKeys) => {
-			this.setState({selectedLanguages: selectedRowKeys})
-		}
-	};
+	delete() {
+		let length = this.state.selectedRowKeys.length;
+		let resource = this.resource + (length === 1 ?  this.state.selectedRowKeys[0] : '');
+		let params = length === 1 ? {} : {ids: this.state.selectedRowKeys.join()};
+
+		Axios.delete(resource, {params}).then(() => {
+			let totalElements = this.state.pagination.totalElements - length;
+
+			let totalPages = totalElements / this.state.pagination.itemsByPage;
+			totalPages = Math.floor(totalPages) + Math.ceil(totalPages % 1);
+
+			let currentPage = this.state.pagination.currentPage;
+			if (!totalPages)
+				currentPage = 1;
+			else if(currentPage > totalPages)
+				currentPage = totalPages;
+
+			this.setState({
+				pagination: {
+					...this.state.pagination,
+					totalElements,
+					currentPage
+				}
+			}, this.getLanguages);
+		}).catch((error) => {
+			notification.error({
+				message: 'Error',
+				description: error.response.data.message
+			});
+		});
+	}
+
 
 	sortOrder(name) {
 		return this.state.sort.col !== name ? null :
@@ -101,13 +131,12 @@ class Languages extends Component {
 	}
 
 	render() {
-
 		const columns = [{
 			title: 'ID',
 			dataIndex: 'id',
 			sorter: true,
 			sortOrder: this.sortOrder('id'),
-			render: text => <a href="#">{text}</a>
+			render: id => <NavLink to={'/languages/'+id}>{id}</NavLink>
 		},{
 			title: 'Name',
 			dataIndex: 'name',
@@ -134,6 +163,13 @@ class Languages extends Component {
 			render: value => value ? <Icon style={{color: 'green'}} type="check" /> : <Icon style={{color: 'red'}} type="close" />
 		}];
 
+		const { selectedRowKeys } = this.state;
+		const rowSelection = {
+			selectedRowKeys,
+			onChange: (selectedRowKeys) => {
+				this.setState({selectedRowKeys})
+			}
+		};
 		return (
 			<MainTemplate title="Languages">
 				<Row>
@@ -145,9 +181,9 @@ class Languages extends Component {
 						/>
 					</Col>
 					<Col style={{textAlign: 'right'}}>
-						<Button type="primary" icon="plus">Add new</Button>
+						<NavLink to="/languages/create"><Button type="primary" icon="plus">Add new</Button></NavLink>
 						&nbsp;&nbsp;&nbsp;
-						<Button type="danger" icon="close" disabled={!this.state.selectedLanguages.length}>Delete</Button>
+						<Button onClick={this.delete.bind(this)} type="danger" icon="close" disabled={!this.state.selectedRowKeys.length}>Delete</Button>
 					</Col>
 				</Row>
 				<br />
@@ -155,7 +191,7 @@ class Languages extends Component {
 					dataSource={this.state.languages}
 					columns={columns}
 					rowKey='id'
-					rowSelection={this.rowSelection}
+					rowSelection={rowSelection}
 					bordered={true}
 					loading={this.state.loading}
 					onChange={this.tableChange.bind(this)}
@@ -167,7 +203,8 @@ class Languages extends Component {
 						pageSize: this.state.pagination.itemsByPage,
 						current: this.state.pagination.currentPage,
 						onChange: this.updatePage.bind(this),
-						onShowSizeChange: this.updateItemsByPage.bind(this)
+						onShowSizeChange: this.updateItemsByPage.bind(this),
+						pageSizeOptions: ['10','20','1','2']
 					}}>
 				</Table>
 			</MainTemplate>
