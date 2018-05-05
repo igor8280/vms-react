@@ -10,7 +10,10 @@ class EditTemplate extends Component {
 		return (
 			<Layout>
 				<Header className={less.header}>
-					<EditHeader title={this.props.title} />
+					<EditHeader
+						title={this.props.title}
+						onSubmit={this.props.onSubmit}
+					/>
 				</Header>
 				<Layout>
 					<Content className={less.app}>

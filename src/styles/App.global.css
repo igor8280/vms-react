@@ -17,3 +17,7 @@ body {
 .ant-layout-header {
     padding: 0px;
 }
+
+.ant-spin-nested-loading {
+    width: 100%;
+}

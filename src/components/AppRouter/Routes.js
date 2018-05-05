@@ -23,16 +23,12 @@ export default [
   {
     path: '/languages',
     component: require('../../containers/Languages/Languages'),
+	exact: true,
     name: 'languages'
+  },
+  {
+    path: '/languages/:id',
+    component: require('../../containers/Languages/LanguagesForm'),
+    name: 'languages-edit'
   }
-  // {
-  //   path: '/languages/:id',
-  //   component: require('../../containers/Languages/LanguagesForm'),
-  //   name: 'languages-edit'
-  // },
-  // {
-  //   path: '/languages/create',
-  //   component: require('../../containers/Languages/LanguagesForm'),
-  //   name: 'languages-create'
-  // }
 ];
