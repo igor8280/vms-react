@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Axios from 'axios';
 import { Table, Icon, Input, Row, Col, Button, notification } from 'antd';
-import MainTemplate from '../Template/Main';
+import MainTemplate, { Utils } from '../Template/Main';
 
 const Search = Input.Search;
 
@@ -11,16 +11,9 @@ class Languages extends Component {
 		languages: [],
 		selectedRowKeys: [],
 		loading: false,
-		search: '',
-		sort: {
-			col: 'name',
-			order: 'asc'
-		},
-		pagination: {
-			currentPage: 1,
-			itemsByPage: 10,
-			totalElements: 1
-		}
+		search: Utils.getCache('languages').search || '',
+		sort: Utils.getSort('languages', 'name,asc'),
+		pagination: Utils.getPagination('languages')
 	};
 
 	resource = '/proxy/languages/';
@@ -34,7 +27,7 @@ class Languages extends Component {
 		let params = {
 			'size': this.state.pagination.itemsByPage,
 			'page': (this.state.pagination.currentPage - 1),
-			'sort': this.state.sort.col + ',' + this.state.sort.order
+			'sort': this.state.sort
 		};
 
 		if (this.state.search)
@@ -50,11 +43,12 @@ class Languages extends Component {
 				},
 				selectedRowKeys: [],
 				loading: false
-			});
+			}, () => Utils.setPagination('languages', this.state.pagination));
 		});
 	}
 
 	getLanguagesBySearch(value) {
+		Utils.updateCache('languages', {search: value});
 		this.setState({
 			search: value,
 			pagination: {
@@ -84,11 +78,9 @@ class Languages extends Component {
 
 		Axios.delete(resource, {params}).then(() => {
 			let totalElements = this.state.pagination.totalElements - length;
-
-			let totalPages = totalElements / this.state.pagination.itemsByPage;
-			totalPages = Math.floor(totalPages) + Math.ceil(totalPages % 1);
-
+			let totalPages = Math.ceil(totalElements / this.state.pagination.itemsByPage);
 			let currentPage = this.state.pagination.currentPage;
+
 			if (!totalPages)
 				currentPage = 1;
 			else if(currentPage > totalPages)
@@ -109,25 +101,10 @@ class Languages extends Component {
 		});
 	}
 
-
-	sortOrder(name) {
-		return this.state.sort.col !== name ? null :
-				this.state.sort.order === 'asc' ? 'ascend' : 'descend';
-	}
-
 	tableChange(pagination, filters, sorter) {
-		if (Object.keys(sorter).length) {
-			let order = sorter.order === 'ascend' ? 'asc' : 'desc';
-
-			if (this.state.sort.order !== order || this.state.sort.col !== sorter.field) {
-				this.setState({
-					sort: {
-						col: sorter.field,
-						order
-					}
-				}, this.getLanguages)
-			}
-		}
+		Utils.updateSort('languages', sorter, (sort) => {
+			this.setState({sort}, this.getLanguages)
+		});
 	}
 
 	render() {
@@ -135,31 +112,31 @@ class Languages extends Component {
 			title: 'ID',
 			dataIndex: 'id',
 			sorter: true,
-			sortOrder: this.sortOrder('id'),
+			sortOrder: Utils.sortOrder('id', this.state.sort),
 			render: id => <NavLink to={'/languages/'+id}>{id}</NavLink>
 		},{
 			title: 'Name',
 			dataIndex: 'name',
 			sorter: true,
-			sortOrder: this.sortOrder('name')
+			sortOrder: Utils.sortOrder('name', this.state.sort)
 		}, {
 			title: 'Iso Code',
 			dataIndex: 'isoCodeTwoB',
 			key: 'isoCodeTwoB',
 			sorter: true,
-			sortOrder: this.sortOrder('isoCodeTwoB')
+			sortOrder: Utils.sortOrder('isoCodeTwoB', this.state.sort)
 		},{
 			title: 'Description',
 			dataIndex: 'description',
 			key: 'description',
 			sorter: true,
-			sortOrder: this.sortOrder('description')
+			sortOrder: Utils.sortOrder('description', this.state.sort)
 		}, {
 			title: 'Shortlisted',
 			dataIndex: 'shortlisted',
 			align: 'center',
 			sorter: true,
-			sortOrder: this.sortOrder('shortlisted'),
+			sortOrder: Utils.sortOrder('shortlisted', this.state.sort),
 			render: value => value ? <Icon style={{color: 'green'}} type="check" /> : <Icon style={{color: 'red'}} type="close" />
 		}];
 
@@ -176,14 +153,22 @@ class Languages extends Component {
 					<Col span={6}>
 						<Search
 							placeholder="Search..."
+							defaultValue={this.state.search}
 							onSearch={value => this.getLanguagesBySearch(value)}
 							enterButton
 						/>
 					</Col>
 					<Col style={{textAlign: 'right'}}>
-						<NavLink to="/languages/create"><Button type="primary" icon="plus">Add new</Button></NavLink>
+						<NavLink to="/languages/create">
+							<Button type="primary" icon="plus">Add new</Button>
+						</NavLink>
 						&nbsp;&nbsp;&nbsp;
-						<Button onClick={this.delete.bind(this)} type="danger" icon="close" disabled={!this.state.selectedRowKeys.length}>Delete</Button>
+						<Button onClick={this.delete.bind(this)}
+								type="danger"
+								icon="close"
+								disabled={!this.state.selectedRowKeys.length}>
+							Delete
+						</Button>
 					</Col>
 				</Row>
 				<br />
@@ -203,8 +188,7 @@ class Languages extends Component {
 						pageSize: this.state.pagination.itemsByPage,
 						current: this.state.pagination.currentPage,
 						onChange: this.updatePage.bind(this),
-						onShowSizeChange: this.updateItemsByPage.bind(this),
-						pageSizeOptions: ['10','20','1','2']
+						onShowSizeChange: this.updateItemsByPage.bind(this)
 					}}>
 				</Table>
 			</MainTemplate>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
 import MainHeader from '../Header/Main';
+import * as Utils from '../../utils';
 import less from '../App.less';
 
 const { Header, Content } = Layout;
@@ -31,3 +32,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(MainTemplate);
+
+export { Utils };

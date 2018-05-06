@@ -1,11 +1,15 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import { updateSessionStorage } from '../../utils/Storage';
 import {Menu, Icon} from 'antd';
 import './Nav.global.css';
 
 const SubMenu = Menu.SubMenu;
-const handleClick = (e, props) => {
-	console.log(e, props);
+const handleClick = () => {
+	updateSessionStorage({
+		pagination: {},
+		cache: {}
+	});
 };
 
 let handleTitleClick = (e) => {

@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './store/store';
+import { updateLocalStorage } from './utils/Storage';
 
-store.subscribe(() => {
-	window.localStorage.setItem('vms', JSON.stringify(store.getState()));
-});
+store.subscribe(() => updateLocalStorage(store.getState()));
 
 import App from './containers/App';
 import './styles/App.global.css';
