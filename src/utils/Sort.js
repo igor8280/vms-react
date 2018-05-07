@@ -1,5 +1,11 @@
 import { getLocalStorage, updateLocalStorage } from './Storage';
 
+/**
+ * getSort fn - set sorting params for data table (grid).
+ * @param name String - name of the key for specified feature
+ * @param sort String - set default (first) sorting key with asc/desc. example: 'name, asc'
+ * @returns String - sorting key
+ */
 const getSort = (name, sort) => {
 	let storage = getLocalStorage();
 
