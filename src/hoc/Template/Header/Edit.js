@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon } from 'antd';
-import {showNav} from "../../store/actions";
+import {showNav} from "../../../store/actions/index";
 import less from './Edit.less';
 
 class EditHeader extends Component {

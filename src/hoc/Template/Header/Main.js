@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Button, Icon } from 'antd';
 
-import {toggleNav, showNav} from "../../store/actions";
-import { logout } from '../../services/Auth';
+import {toggleNav, showNav} from "../../../store/actions/index";
+import { logout } from '../../../services/Auth';
 import less from './Main.less';
 
 class MainHeader extends Component {

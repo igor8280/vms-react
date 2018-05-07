@@ -1,5 +1,5 @@
 import React from 'react';
-import MainHeader from '../../containers/Template/Main';
+import MainHeader from '../../hoc/Template/MainContainer';
 
 const dashboard = () => {
   return (

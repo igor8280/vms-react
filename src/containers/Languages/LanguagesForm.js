@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { Row, Col, Form, Input, Select, Switch, notification, Spin } from 'antd';
-import EditTemplate from '../Template/Edit';
+import EditTemplate from '../../hoc/Template/EditContainer';
 
 const FormItem = Form.Item;
 const Option = Select.Option;

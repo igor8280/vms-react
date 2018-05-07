@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import Axios from 'axios';
 import {Table, Input, Row, Col, Button, notification} from 'antd';
-import MainHeader from '../Template/Main';
+import MainHeader from '../../hoc/Template/MainContainer';
 
 const Search = Input.Search;
 

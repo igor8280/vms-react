@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Axios from 'axios';
 import { Table, Icon, Input, Row, Col, Button, notification } from 'antd';
-import MainTemplate, { Utils } from '../Template/Main';
+import MainTemplate, { Utils } from '../../hoc/Template/MainContainer';
 
 const Search = Input.Search;
 
